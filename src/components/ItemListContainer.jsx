@@ -1,10 +1,21 @@
-
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import ItemList from "./ItemList";
+import { getProducts } from "../asyncMock/data";
 
 function ItemListContainer({ mensaje }) {
+    const [products, setProducts] = useState([]);
+    const { categoryId } = useParams();
+
+    useEffect(() => {
+        getProducts(categoryId).then(res => setProducts(res));
+    }, [categoryId]);
+
     return (
-        <div style={{ padding: "2rem", fontSize: "1.2rem" }}>
-        {mensaje}
-    </div>
+        <div style={{ padding: "2rem" }}>
+        {mensaje && <h2>{mensaje}</h2>}
+        <ItemList products={products} />
+        </div>
     );
 }
 

@@ -19,6 +19,9 @@ function NavBar() {
         <li>
           <Link to="/category/zapatillas">Zapatillas</Link>
         </li>
+        <li>
+        <Link to="/category/camperas">Camperas</Link>
+        </li>
       </ul>
 
       <CartWidget />

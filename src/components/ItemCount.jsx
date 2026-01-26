@@ -1,21 +1,29 @@
 import { useState } from "react";
+import { Button } from "react-bootstrap";
 
-const ItemCount = () => {
-    const [counter, setCounter] = useState(1)
+function ItemCount() {
+    const [count, setCount] = useState(1);
 
-    const sumar = () => {
-        setCounter(counter + 1)
-    }
-    const restar = () => {
-        setCounter(counter - 1)
-    }
-    return ( 
-        <div>
-            <button onClick={restar}>-</button>
-            <span>{counter}</span>
-            <button onClick={sumar}>+</button>
+    return (
+        <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+        <Button
+            variant="secondary"
+            onClick={() => setCount(count - 1)}
+            disabled={count <= 1}
+        >
+            -
+        </Button>
+        <span>{count}</span>
+        <Button
+            variant="secondary"
+            onClick={() => setCount(count + 1)}
+        >
+            +
+        </Button>
         </div>
     );
 }
-    
-    export default ItemCount
+
+
+
+export default ItemCount;
