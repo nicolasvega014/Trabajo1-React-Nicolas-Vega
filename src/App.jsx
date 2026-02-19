@@ -5,6 +5,11 @@ import ItemDetailContainer from "./components/ItemDetailContainer";
 import { Routes, Route } from "react-router-dom";
 import Cart from "./components/Cart";
 import CheckoutForm from "./components/CheckoutForm";
+// Route de desarrollo para sembrar productos en Firestore
+let SeedProducts;
+if (import.meta.env && import.meta.env.DEV) {
+  SeedProducts = (await import("./components/SeedProducts.jsx")).default;
+}
 
 function App() {
   return (
@@ -36,6 +41,10 @@ function App() {
           path="/checkout"
           element={<CheckoutForm />}
         />
+
+        {import.meta.env && import.meta.env.DEV && (
+          <Route path="/seed" element={<SeedProducts />} />
+        )}
 
         <Route
           path="*"

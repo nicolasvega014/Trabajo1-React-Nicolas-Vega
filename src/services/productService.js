@@ -16,7 +16,6 @@ export const getProducts = async (categoryId) => {
     const snapshot = await getDocs(q);
     return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
   } catch (error) {
-    console.error("Error fetching products:", error);
     return [];
   }
 };
@@ -28,7 +27,6 @@ export const getProductById = async (id) => {
     if (snap.exists()) return { id: snap.id, ...snap.data() };
     return null;
   } catch (error) {
-    console.error("Error fetching product by id:", error);
     return null;
   }
 };

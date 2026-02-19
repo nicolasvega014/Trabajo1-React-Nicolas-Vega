@@ -5,17 +5,25 @@ import ItemDetail from "./ItemDetail";
 
 function ItemDetailContainer() {
     const [product, setProduct] = useState(null);
+        const [loading, setLoading] = useState(true);
     const { itemId } = useParams();
 
     useEffect(() => {
-        getProductById(itemId).then((res) => {
-        setProduct(res);
-        });
+                setLoading(true);
+                getProductById(itemId)
+                    .then((res) => {
+                        setProduct(res);
+                    })
+                    .finally(() => setLoading(false));
     }, [itemId]);
 
-    if (!product) {
-        return <p style={{ padding: "2rem" }}>Cargando...</p>;
-    }
+        if (loading) {
+                return <p style={{ padding: "2rem" }}>Cargando...</p>;
+        }
+
+        if (!product) {
+            return <p style={{ padding: "2rem" }}>Producto no encontrado</p>;
+        }
 
     return <ItemDetail product={product} />;
 }

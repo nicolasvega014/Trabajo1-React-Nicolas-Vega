@@ -6,16 +6,20 @@ import { getProducts } from "../services/productService";
 
 function ItemListContainer({ mensaje }) {
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
     const { categoryId } = useParams();
 
     useEffect(() => {
-        getProducts(categoryId).then(res => setProducts(res));
+        setLoading(true);
+        getProducts(categoryId)
+          .then((res) => setProducts(res))
+          .finally(() => setLoading(false));
     }, [categoryId]);
 
     return (
         <div style={{ padding: "2rem" }}>
         {mensaje && <h2>{mensaje}</h2>}
-        <ItemList products={products} />
+        {loading ? <p>Cargando productos...</p> : <ItemList products={products} />}
         </div>
     );
 }

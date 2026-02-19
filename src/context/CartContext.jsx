@@ -6,17 +6,25 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   const addItem = (item, quantity) => {
-    const itemExists = cart.find(prod => prod.id === item.id);
+    const itemExists = cart.find((prod) => prod.id === item.id);
 
+    // Validate stock before adding
     if (itemExists) {
-      const updatedCart = cart.map(prod =>
-        prod.id === item.id
-          ? { ...prod, quantity: prod.quantity + quantity }
-          : prod
+      const newQuantity = itemExists.quantity + quantity;
+      if (newQuantity > item.stock) {
+        return false; // cannot add beyond stock
+      }
+      const updatedCart = cart.map((prod) =>
+        prod.id === item.id ? { ...prod, quantity: newQuantity } : prod
       );
       setCart(updatedCart);
+      return true;
     } else {
+      if (quantity > item.stock) {
+        return false;
+      }
       setCart([...cart, { ...item, quantity }]);
+      return true;
     }
   };
 

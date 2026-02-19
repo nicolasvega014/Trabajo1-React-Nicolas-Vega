@@ -6,11 +6,17 @@ import ItemCount from "./ItemCount";
 
 function ItemDetail({ product }) {
   const [added, setAdded] = useState(false);
+  const [error, setError] = useState("");
   const { addItem } = useContext(CartContext);
 
   const handleAdd = (quantity) => {
-    addItem(product, quantity);
-    setAdded(true);
+    const ok = addItem(product, quantity);
+    if (ok) {
+      setAdded(true);
+      setError("");
+    } else {
+      setError("No hay stock suficiente para esa cantidad");
+    }
   };
 
   return (
@@ -36,6 +42,7 @@ function ItemDetail({ product }) {
               </Button>
             </Link>
           )}
+          {error && <p style={{ color: "red" }}>{error}</p>}
         </Card.Body>
       </Card>
     </div>

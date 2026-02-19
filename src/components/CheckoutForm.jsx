@@ -10,6 +10,7 @@ function CheckoutForm() {
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
   const [orderId, setOrderId] = useState(null);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +31,7 @@ function CheckoutForm() {
       setOrderId(docRef.id);
       clear();
     } catch (error) {
-      console.error("Error creating order:", error);
+      setError("Ocurrió un error creando la orden. Intenta nuevamente.");
     } finally {
       setLoading(false);
     }
@@ -58,6 +59,7 @@ function CheckoutForm() {
           <button type="submit" disabled={loading}>{loading ? "Enviando..." : "Confirmar compra"}</button>
         </form>
       )}
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 }
