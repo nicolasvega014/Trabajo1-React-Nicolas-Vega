@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ItemDetailContainer from "./components/ItemDetailContainer";
 import { Routes, Route } from "react-router-dom";
 import Cart from "./components/Cart";
+import CheckoutForm from "./components/CheckoutForm";
 
 function App() {
   return (
@@ -29,6 +30,11 @@ function App() {
         <Route
           path="/cart"
           element={<Cart />}
+        />
+
+        <Route
+          path="/checkout"
+          element={<CheckoutForm />}
         />
 
         <Route

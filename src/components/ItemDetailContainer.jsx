@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProductById } from "../asyncMock/data";
+import { getProductById } from "../services/productService";
 import ItemDetail from "./ItemDetail";
 
 function ItemDetailContainer() {
