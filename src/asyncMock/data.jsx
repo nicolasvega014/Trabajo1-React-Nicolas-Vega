@@ -40,3 +40,15 @@ const products = [
     stock: 6
   }
 ];
+
+export const getProducts = (categoryId) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      if (categoryId) {
+        resolve(products.filter(prod => prod.category === categoryId));
+      } else {
+        resolve(products);
+      }
+    }, 500); // Simula un delay de 500ms
+  });
+};
