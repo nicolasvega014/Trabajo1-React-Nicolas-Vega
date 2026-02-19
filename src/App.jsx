@@ -1,9 +1,9 @@
 import NavBar from "./components/NavBar";
 import ItemListContainer from "./components/ItemListContainer";
-import ItemCount from "./components/ItemCount";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import ItemDetailContainer from "./components/ItemDetailContainer";
-import { BrowserRouter ,Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import Cart from "./components/Cart";
 
 function App() {
   return (
@@ -27,6 +27,11 @@ function App() {
         />
 
         <Route
+          path="/cart"
+          element={<Cart />}
+        />
+
+        <Route
           path="*"
           element={<h2>Página no encontrada</h2>}
         />
@@ -36,4 +41,3 @@ function App() {
 }
 
 export default App;
-
